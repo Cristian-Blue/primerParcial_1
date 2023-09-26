@@ -134,6 +134,7 @@ src\
     - **success :** boolean
     - **data :** json
     - **msg :** string 
+    
 <code>DELETE /api/producto/:id</code> 
 - Request
     - **params:**
