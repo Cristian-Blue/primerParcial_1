@@ -16,7 +16,7 @@ Esta API permite obtener y almacenar información de productos varios, siempre y
 
 ### Clonar el repositorio:
 ```
-    git clone https://github.com/bluemaster23/clase.git
+    git clone https://github.com/Cristian-Blue/primerParcial_1
     cd clase
 ```
 
