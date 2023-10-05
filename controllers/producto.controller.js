@@ -46,14 +46,14 @@ export async function putProducto (req, res){
         const { id, nombre, detalle, valor, img } = req.body;
         update = await getProductoUnicoModel(id);  
         if(!update){
-            res.status(200).json({success: true, data: [] ,   msg :'El dato no existe, no pued ser actualizado'})
+            return res.status(200).json({success: true, data: [] ,   msg :'El dato no existe, no puede ser actualizado'})
         }
         const data = await putProductoModel(id, nombre, detalle, valor , img ); 
-        update = await getProductoUnicoModel(id);  
-        res.status(201).json({success: true, data:update ,   msg : data})
+        update = await getProductoUnicoModel(id);   
+        return res.status(201).json({success: true, data:update ,   msg : data})
 
     }catch(e){
-        res.json({data: update ,msg: 'Servicio no disponible, Por favor intente mas tarde',success: false});
+       return res.json({data: [] ,msg: 'Servicio no disponible, Por favor intente mas tarde',success: false});
     }
 }
 
@@ -61,9 +61,13 @@ export async function putProducto (req, res){
 export async function deleteProducto (req, res){
     try{
         const { id } = req.params;
+        const deleteId = await getProductoUnicoModel(id);  
+        if(!deleteId){
+            return res.status(200).json({success: true, data: [] ,   msg :'El dato no existe, no puede ser eliminado'})
+        }
         const data = await   delteProductoModel(id); 
         res.json({success: true, data: [] ,   msg : data})
-    }catch(e){
+    }catch(e){ 
         res.status(500).json({data: [],msg: 'Servicio no disponible, Por favor intente mas tarde',success: false});
     }
 }

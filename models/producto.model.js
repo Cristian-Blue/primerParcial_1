@@ -42,16 +42,13 @@ export const postProductoModel = async (nombre, detalle, valor, url ) => {
 export const putProductoModel =  async (id, nombre, detalle, valor, url) => {
     try{
         const pg =  new pgService(); 
-        let temp = await pg.connection.none(`UPDATE PRODUCTO 
+        await pg.connection.none(`UPDATE PRODUCTO 
         SET NOMBRE = $2,
             DETALLE = $3,
             VALOR = $4,
             IMG = case $5 when null then IMG else $5 end 
         WHERE ID_PRODUCTO  = $1
-        ` ,[id, nombre,detalle, valor, url]).then(res=>{
-            console.log(res);
-        });
-        console.log(temp);
+        ` ,[id, nombre,detalle, valor, url]);
         return  'Transacción realizada';
     }catch(error){ 
         return 'En este momento no se puede realizar su transacción';
@@ -60,8 +57,7 @@ export const putProductoModel =  async (id, nombre, detalle, valor, url) => {
  
 
 export const delteProductoModel = async (id) => {
-    try{
-        console.log(id);
+    try{ 
         const pg =  new pgService(); 
         pg.connection.none(`DELETE FROM PRODUCTO WHERE ID_PRODUCTO = $1` ,[id]);
         return  'Transacción realizada';
